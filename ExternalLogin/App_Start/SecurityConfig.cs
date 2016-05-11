@@ -44,9 +44,10 @@ namespace ExternalLogin
                 new OpenIdConnectAuthenticationOptions
                 {
                     Authority = "https://localhost:44342/identity",
+                    Scope = "openid profile scope1",
                     ClientId = "client1",
-                    RedirectUri = "https://localhost:44342/",
-                    ResponseType = "id_token",
+                    RedirectUri = "https://localhost:44342/test",
+                    ResponseType = "id_token token",
 
                     SignInAsAuthenticationType = "Cookies"
                 });

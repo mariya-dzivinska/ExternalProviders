@@ -7,23 +7,11 @@ namespace ExternalLogin.Helpers
     {
         public static IEnumerable<Scope> Get()
         {
-            var scopes = new List<Scope>
-            {
-                new Scope
-                {
-                    Enabled = true,
-                    Name = "scope1",
-                    Type = ScopeType.Identity,
-                    Claims = new List<ScopeClaim>
-                    {
-                        new ScopeClaim("one")
-                    }
-                }
+            return new List<Scope> {
+                StandardScopes.OpenId,
+                StandardScopes.Profile,
+                StandardScopes.Email
             };
-
-                scopes.AddRange(StandardScopes.All);
-
-                return scopes;
-            }
+        }
     }
 }

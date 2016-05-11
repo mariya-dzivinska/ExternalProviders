@@ -10,7 +10,7 @@ namespace ExternalLogin.Controllers
         [HttpPost]
         public IHttpActionResult Login(string userName, string password)
         {
-            //TODO: authenticate through google provider
+            //TODO: login
 
             return this.Ok();
         }
