@@ -3,10 +3,11 @@ using System.Configuration;
 using System.Security.Cryptography.X509Certificates;
 using ExternalLogin.Helpers;
 using IdentityServer3.Core.Configuration;
-using IdentityServer3.Core.Models;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
+using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
+using AuthenticationOptions = IdentityServer3.Core.Configuration.AuthenticationOptions;
 
 namespace ExternalLogin
 {
@@ -18,26 +19,37 @@ namespace ExternalLogin
             {
                 SiteName = "Identity server 3",
                 SigningCertificate = LoadCertificate(),
-
                 Factory = new IdentityServerServiceFactory()
                     .UseInMemoryUsers(Users.Get())
                     .UseInMemoryClients(Clients.Get())
-                    .UseInMemoryScopes(StandardScopes.All),
+                    .UseInMemoryScopes(Scopes.Get()),
                 AuthenticationOptions = new AuthenticationOptions
                 {
+                    EnablePostSignOutAutoRedirect = true,
                     IdentityProviders = ConfigureIdentityProviders
                 }
             };
 
-            app.UseIdentityServer(serverOptions);
+            app.Map("/identity", idsrvApp =>
+            {
+                idsrvApp.UseIdentityServer(serverOptions);
+            });
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "Cookies"
             });
 
-            app.UseExternalSignInCookie("Cookies");
+            app.UseOpenIdConnectAuthentication(
+                new OpenIdConnectAuthenticationOptions
+                {
+                    Authority = "https://localhost:44342/identity",
+                    ClientId = "client1",
+                    RedirectUri = "https://localhost:44342/",
+                    ResponseType = "id_token",
 
+                    SignInAsAuthenticationType = "Cookies"
+                });
         }
 
         private static X509Certificate2 LoadCertificate()
@@ -51,7 +63,7 @@ namespace ExternalLogin
         {
             var clientId = ConfigurationManager.AppSettings["GoogleClientId"];
             var clientSecret = ConfigurationManager.AppSettings["GoogleSecret"];
-            var options = new GoogleOAuth2AuthenticationOptions()
+            var options = new GoogleOAuth2AuthenticationOptions
             {
                 AuthenticationType = "Google",
                 Caption = "Google",

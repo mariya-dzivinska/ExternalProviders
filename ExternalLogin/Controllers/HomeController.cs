@@ -6,12 +6,18 @@ namespace ExternalLogin.Controllers
     [Authorize]
     public class HomeController : ApiController
     {
-        [Route("home")]
+        [HttpGet]
         [Authorize]
-        public IHttpActionResult Get()
+        [Route("test")]
+        public IHttpActionResult Home()
         {
-            var user = (User as ClaimsPrincipal).Claims;
-            return this.Ok(user);
+            var user = User as ClaimsPrincipal;
+            return this.Ok(
+                new
+                {
+                    message = "OK computer",
+                    client = user.FindFirst("client_id").Value
+                });
         }
     }
 }

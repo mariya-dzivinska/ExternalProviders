@@ -6,19 +6,13 @@ namespace ExternalLogin.Controllers
 {
     public class LoginController : ApiController
     {
-        [HttpGet]
-        [Route("identity")]
-        public IHttpActionResult ExternalLogin()
+        [Route("login")]
+        [HttpPost]
+        public IHttpActionResult Login(string userName, string password)
         {
-            var user = User as ClaimsPrincipal;
-            var claims = from c in user.Claims
-                         select new
-                         {
-                             type = c.Type,
-                             value = c.Value
-                         };
+            //TODO: authenticate through google provider
 
-            return Json(claims);
+            return this.Ok();
         }
     }
 }

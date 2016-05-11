@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
-using System.Web;
 using IdentityServer3.Core;
 using IdentityServer3.Core.Services.InMemory;
 
@@ -23,7 +20,8 @@ namespace ExternalLogin.Helpers
                 Claims = new[]
                 {
                     new Claim(Constants.ClaimTypes.GivenName, "Bob"),
-                    new Claim(Constants.ClaimTypes.FamilyName, "Smith")
+                    new Claim(Constants.ClaimTypes.FamilyName, "Smith"),
+                    new Claim(Constants.ClaimTypes.Email, "bobsmith@gmail.com")
                 }
             }
         };

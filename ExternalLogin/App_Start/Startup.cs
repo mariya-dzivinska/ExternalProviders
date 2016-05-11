@@ -1,5 +1,4 @@
-﻿using System.Web.Http;
-using Owin;
+﻿using Owin;
 
 namespace ExternalLogin
 {
