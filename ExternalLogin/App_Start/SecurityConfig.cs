@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
+using System.Web.Helpers;
 using ExternalLogin.Helpers;
 using IdentityServer3.Core.Configuration;
 using Microsoft.Owin.Security.Cookies;
@@ -35,6 +38,9 @@ namespace ExternalLogin
                 idsrvApp.UseIdentityServer(serverOptions);
             });
 
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = "sub";
+            JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
+
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "Cookies"
@@ -43,10 +49,10 @@ namespace ExternalLogin
             app.UseOpenIdConnectAuthentication(
                 new OpenIdConnectAuthenticationOptions
                 {
-                    Authority = "https://localhost:44342/identity",
-                    Scope = "openid profile scope1",
+                    Authority = "https://localhost:44385/identity",
+                    Scope = "openid profile email",
                     ClientId = "client1",
-                    RedirectUri = "https://localhost:44342/test",
+                    RedirectUri = "https://localhost:44385/",
                     ResponseType = "id_token token",
 
                     SignInAsAuthenticationType = "Cookies"

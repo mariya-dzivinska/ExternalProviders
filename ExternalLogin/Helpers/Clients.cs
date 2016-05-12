@@ -31,11 +31,11 @@ namespace ExternalLogin.Helpers
                     },
                     RedirectUris = new List<string>
                     {
-                        "https://localhost:44342/"
+                        "https://localhost:44385/"
                     },
                     PostLogoutRedirectUris  = new List<string>
                     {
-                        "https://localhost:44342/"
+                        "https://localhost:44385/"
                     }
                 }
            };
