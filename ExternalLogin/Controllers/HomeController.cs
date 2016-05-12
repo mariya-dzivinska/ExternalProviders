@@ -12,11 +12,19 @@ namespace ExternalLogin.Controllers
             return this.Json("Hello");
         }
 
+        [Authorize]
+        [Route("two")]
+        [HttpGet]
+        public IHttpActionResult Two()
+        {
+            return this.Json("Two");
+        }
+
         [Route("one")]
         [HttpGet]
         public IHttpActionResult One()
         {
-            return this.Json("Hello");
+            return this.Json("One");
         }
     }
 }
