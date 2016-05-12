@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
-using System.Web.Helpers;
 using ExternalLogin.Helpers;
 using IdentityServer3.Core.Configuration;
 using Microsoft.Owin.Security.Cookies;
@@ -38,7 +37,7 @@ namespace ExternalLogin
                 idsrvApp.UseIdentityServer(serverOptions);
             });
 
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = "sub";
+            //AntiForgeryConfig.UniqueClaimTypeIdentifier = "sub";
             JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
