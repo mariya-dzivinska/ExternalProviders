@@ -2,7 +2,10 @@
 
 *.suo
 *.[Oo]bj
-obj/
+obj
 [Bb]in
-[Dd]ebug*/
+[Dd]ebug
 *.[Cc]ache
+packages
+.vs
+*.user
