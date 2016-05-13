@@ -1,5 +1,11 @@
+#Visual Studio files
 
 *.suo
 *.[Oo]bj
-obj/
-bin/
+obj
+[Bb]in
+[Dd]ebug
+*.[Cc]ache
+packages
+.vs
+*.user

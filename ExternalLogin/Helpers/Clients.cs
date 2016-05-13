@@ -18,9 +18,10 @@ namespace ExternalLogin.Helpers
                     Enabled = true,
                     AccessTokenType = AccessTokenType.Jwt,
                     Flow = Flows.Implicit,
+                    RequireConsent = true,
                     ClientSecrets = new List<Secret>
                     {
-                        new Secret("F621F470-9731-4A25-80EF-67A6F7C5F4B8".Sha256())
+                        new Secret("idsrv3test".Sha256())
                     },
 
                     AllowedScopes = new List<string>
