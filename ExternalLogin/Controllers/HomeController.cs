@@ -1,4 +1,6 @@
-﻿using System.Web.Http;
+﻿using System.Linq;
+using System.Security.Claims;
+using System.Web.Http;
 
 namespace ExternalLogin.Controllers
 {
@@ -9,15 +11,8 @@ namespace ExternalLogin.Controllers
         [HttpGet]
         public IHttpActionResult Index()
         {
-            return this.Json("Hello");
-        }
-
-        [Authorize]
-        [Route("two")]
-        [HttpGet]
-        public IHttpActionResult Two()
-        {
-            return this.Json("Two");
+            var user = (ClaimsPrincipal)User;
+            return this.Json(string.Join(",", user.Claims.Select(x => x.Type + " " + x.Value)));
         }
 
         [Route("one")]

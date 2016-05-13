@@ -17,7 +17,7 @@ namespace ExternalLogin.Helpers
                     ClientId = "client1",
                     Enabled = true,
                     AccessTokenType = AccessTokenType.Jwt,
-                    Flow = Flows.AuthorizationCode,
+                    Flow = Flows.Implicit,
                     RequireConsent = true,
                     ClientSecrets = new List<Secret>
                     {
